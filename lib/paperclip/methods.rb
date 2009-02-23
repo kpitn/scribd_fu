@@ -42,6 +42,10 @@ module ScribdFu
       private
         # Sets up methods needed for the given +attribute+ to be scribdable.
         def setup_scribd_attribute(attribute)
+          define_method("#{attribute}_title=") do |title|
+            write_attribute "#{attribute}_title", title.to_s.strip
+          end
+
           define_method("#{attribute}_scribd_id=") do |id|
             write_attribute "#{attribute}_scribd_id", id.to_s.strip
           end
@@ -90,7 +94,8 @@ module ScribdFu
           if scribdable?(attribute) and scribd_id.blank?
             with_file_path_for(attribute) do |filename|
               if resource = scribd_login.upload(:file   => filename,
-                                                :access => access_level)
+                                                :access => access_level,
+                                                :title=> self["#{attribute}_title"])
                 self.send("#{attribute}_scribd_id=",         resource.doc_id)
                 self.send("#{attribute}_scribd_access_key=", resource.access_key)
 
