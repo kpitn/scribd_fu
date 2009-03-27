@@ -3,8 +3,7 @@ require 'paperclip/methods'
 
 module ScribdFu
   # A list of content types supported by scribd.
-  CONTENT_TYPES = ['application/pdf', 'image/jpeg', 'image/pjpeg',
-                   'image/gif', 'image/png', 'image/x-png', 'image/jpg',
+  CONTENT_TYPES = ['application/pdf',
                    'application/msword', 'application/mspowerpoint',
                    'application/vnd.ms-powerpoint', 'application/excel',
                    'application/vnd.ms-excel', 'application/postscript',
